@@ -1,0 +1,7 @@
+"""Generated package public API. Do not edit by hand."""
+
+from __future__ import annotations
+
+from fusion_sparse.runtime.context import app
+
+__all__ = ['app']

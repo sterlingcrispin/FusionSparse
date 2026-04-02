@@ -1,0 +1,12 @@
+{
+  "autodeskProduct": "Fusion",
+  "type": "script",
+  "id": "com.sterlingcrispin.fusionsparse.smoke",
+  "author": "Sterling Crispin",
+  "description": {
+    "": "Runs the FusionSparse smoke scripts from the local repository."
+  },
+  "version": "0.0.0",
+  "supportedOS": "windows|mac",
+  "editEnabled": true
+}

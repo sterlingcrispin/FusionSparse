@@ -1,0 +1,21 @@
+"""Generated enum aliases and lookup helpers. Do not edit by hand."""
+
+from __future__ import annotations
+
+import json as _json
+
+ENUM_INDEX = _json.loads('{"adsk.fusion.FeatureOperations":{"aliases":{"new_body":"NewBodyFeatureOperation"},"members":{"NewBodyFeatureOperation":"3"},"name":"FeatureOperations","namespace":"adsk.fusion"},"adsk.fusion.HoleEdgePositions":{"aliases":{"mid":"EdgeMidPointPosition"},"members":{"EdgeMidPointPosition":"1"},"name":"HoleEdgePositions","namespace":"adsk.fusion"},"adsk.fusion.PatternDistanceType":{"aliases":{"spacing":"SpacingPatternDistanceType"},"members":{"SpacingPatternDistanceType":"0"},"name":"PatternDistanceType","namespace":"adsk.fusion"}}')
+
+ENUM_NAME_TO_MODULE = _json.loads('{"FeatureOperations":"adsk.fusion","HoleEdgePositions":"adsk.fusion","PatternDistanceType":"adsk.fusion"}')
+
+ENUM_ALIASES_BY_NAME = _json.loads('{"FeatureOperations":{"new_body":"NewBodyFeatureOperation"},"HoleEdgePositions":{"mid":"EdgeMidPointPosition"},"PatternDistanceType":{"spacing":"SpacingPatternDistanceType"}}')
+
+ENUM_REVERSE_ALIASES_BY_NAME = _json.loads('{"FeatureOperations":{"NewBodyFeatureOperation":"new_body"},"HoleEdgePositions":{"EdgeMidPointPosition":"mid"},"PatternDistanceType":{"SpacingPatternDistanceType":"spacing"}}')
+
+
+def alias_to_member(enum_name: str, alias: str) -> str:
+    return ENUM_ALIASES_BY_NAME[enum_name][alias]
+
+
+def member_to_alias(enum_name: str, member_name: str) -> str:
+    return ENUM_REVERSE_ALIASES_BY_NAME[enum_name][member_name]

@@ -1,0 +1,371 @@
+# Compact behavior policy consumed by generation.
+design_workspace:
+  scope_namespaces:
+    - adsk.fusion
+  waves:
+    wave_one:
+      - ConstructionPlanes
+      - ConstructionAxes
+      - ConstructionPoints
+      - SketchArcs
+      - RevolveFeatures
+      - HoleFeatures
+      - FilletFeatures
+      - ChamferFeatures
+    wave_two:
+      - CombineFeatures
+      - MirrorFeatures
+      - RectangularPatternFeatures
+      - CircularPatternFeatures
+    wave_three:
+      - LoftFeatures
+      - SweepFeatures
+      - ShellFeatures
+      - DraftFeatures
+      - PatchFeatures
+    wave_four:
+      - MoveFeatures
+      - OffsetFeatures
+      - ReplaceFaceFeatures
+      - ScaleFeatures
+      - SplitBodyFeatures
+      - ThreadFeatures
+      - TrimFeatures
+    deferred:
+      - Occurrences
+      - Joints
+      - AsBuiltJoints
+  adjacent:
+    - Sketches
+    - SketchLines
+    - SketchCircles
+    - SketchArcs
+    - SketchPoints
+    - SketchEllipses
+    - SketchFittedSplines
+    - SketchTexts
+    - ExtrudeFeatures
+    - ConstructionPlanes
+    - ConstructionAxes
+    - ConstructionPoints
+    - RevolveFeatures
+    - HoleFeatures
+    - FilletFeatures
+    - ChamferFeatures
+    - CombineFeatures
+    - MirrorFeatures
+    - RectangularPatternFeatures
+    - CircularPatternFeatures
+    - LoftFeatures
+    - SweepFeatures
+    - ShellFeatures
+    - DraftFeatures
+    - PatchFeatures
+    - MoveFeatures
+    - OffsetFeatures
+    - ReplaceFaceFeatures
+    - ScaleFeatures
+    - SplitBodyFeatures
+    - ThreadFeatures
+    - TrimFeatures
+
+planes:
+  xy: xYConstructionPlane
+  xz: xZConstructionPlane
+  yz: yZConstructionPlane
+
+sketch:
+  targets:
+    point: [sketchPoints]
+  collections:
+    point: sketchPoints
+    line: sketchLines
+    circle: sketchCircles
+    arc: sketchArcs
+    arc3p: sketchArcs
+    ellipse: sketchEllipses
+    spline: sketchFittedSplines
+    rect: sketchLines
+    rect_center: sketchLines
+    rect3p: sketchLines
+    circle2p: sketchCircles
+    circle3p: sketchCircles
+  methods:
+    point: add
+    line: addByTwoPoints
+    circle: addByCenterRadius
+    arc: addByCenterStartSweep
+    arc3p: addByThreePoints
+    ellipse: add
+    spline: add
+    rect: addTwoPointRectangle
+    rect_center: addCenterPointRectangle
+    rect3p: addThreePointRectangle
+    circle2p: addByTwoPoints
+    circle3p: addByThreePoints
+  coercers:
+    point: [point]
+    line: [point, point]
+    circle: [point, length_cm]
+    arc: [point, point, identity]
+    arc3p: [point, point, point]
+    ellipse: [point, point, point]
+    spline: [point_collection]
+    rect: [point, point]
+    rect_center: [point, point]
+    rect3p: [point, point, point]
+    circle2p: [point, point]
+    circle3p: [point, point, point]
+  length_units_cm:
+    cm: 1.0
+    in: 2.54
+    inch: 2.54
+    inches: 2.54
+    m: 100.0
+    mm: 0.1
+
+text:
+  family_id: adsk.fusion.SketchTexts
+  collection_attr: sketchTexts
+  builder_input: createInput2
+  builder_terminal: add
+  input_methods:
+    multiline: setAsMultiLine
+    along_path: setAsAlongPath
+    fit_path: setAsFitOnPath
+  input_attrs:
+    horizontal_flip: isHorizontalFlip
+    vertical_flip: isVerticalFlip
+    font_name: fontName
+  horizontal_alignments:
+    left: LeftHorizontalAlignment
+    center: CenterHorizontalAlignment
+    right: RightHorizontalAlignment
+  vertical_alignments:
+    top: TopVerticalAlignment
+    middle: MiddleVerticalAlignment
+    center: MiddleVerticalAlignment
+    bottom: BottomVerticalAlignment
+
+extrude:
+  family_id: adsk.fusion.ExtrudeFeatures
+  extent_types:
+    distance: DistanceExtentDefinition
+    through_all: ThroughAllExtentDefinition
+  input_attrs:
+    participant_bodies: participantBodies
+    solid: isSolid
+  input_methods:
+    one_side: setOneSideExtent
+    symmetric: setSymmetricExtent
+
+construction:
+  plane:
+    family_id: adsk.fusion.ConstructionPlanes
+    builder_input: createInput
+    builder_terminal: add
+    methods:
+      offset: setByOffset
+      angle: setByAngle
+      between: setByTwoPlanes
+      tangent: setByTangent
+      edges: setByTwoEdges
+      three_points: setByThreePoints
+      tangent_at: setByTangentAtPoint
+      on_path: setByDistanceOnPath
+  axis:
+    family_id: adsk.fusion.ConstructionAxes
+    builder_input: createInput
+    builder_terminal: add
+    methods:
+      circular_face: setByCircularFace
+      perpendicular: setByPerpendicularAtPoint
+      between_planes: setByTwoPlanes
+      between_points: setByTwoPoints
+      edge: setByEdge
+      normal: setByNormalToFaceAtPoint
+  point:
+    family_id: adsk.fusion.ConstructionPoints
+    builder_input: createInput
+    builder_terminal: add
+    methods:
+      edges: setByTwoEdges
+      planes: setByThreePlanes
+      edge_plane: setByEdgePlane
+      center: setByCenter
+      at: setByPoint
+
+revolve:
+  family_id: adsk.fusion.RevolveFeatures
+  builder_input: createInput
+  builder_terminal: add
+  input_methods:
+    angle: setAngleExtent
+
+hole:
+  family_id: adsk.fusion.HoleFeatures
+  builder_terminal: add
+  create_methods:
+    simple: createSimpleInput
+    counterbore: createCounterboreInput
+    countersink: createCountersinkInput
+  input_methods:
+    depth: setDistanceExtent
+    by_offsets: setPositionByPlaneAndOffsets
+    on_edge: setPositionOnEdge
+    at_center: setPositionAtCenter
+    by_points: setPositionBySketchPoints
+  edge_positions:
+    start: start
+    mid: mid
+    end: end
+
+fillet:
+  family_id: adsk.fusion.FilletFeatures
+  builder_input: createInput
+  builder_terminal: add
+  input_attrs:
+    edge_sets: edgeSetInputs
+  input_methods:
+    constant_radius: addConstantRadiusEdgeSet
+
+chamfer:
+  family_id: adsk.fusion.ChamferFeatures
+  builder_input: createInput2
+  builder_terminal: add
+  input_attrs:
+    edge_sets: chamferEdgeSets
+  input_methods:
+    equal_distance: addEqualDistanceChamferEdgeSet
+
+combine:
+  family_id: adsk.fusion.CombineFeatures
+  builder_input: createInput
+  builder_terminal: add
+  input_attrs:
+    operation: operation
+    keep_tools: isKeepToolBodies
+    new_component: isNewComponent
+
+mirror:
+  family_id: adsk.fusion.MirrorFeatures
+  builder_input: createInput
+  builder_terminal: add
+
+circular_pattern:
+  family_id: adsk.fusion.CircularPatternFeatures
+  builder_input: createInput
+  builder_terminal: add
+  input_attrs:
+    quantity: quantity
+    total_angle: totalAngle
+    symmetric: isSymmetric
+
+rectangular_pattern:
+  family_id: adsk.fusion.RectangularPatternFeatures
+  builder_input: createInput
+  builder_terminal: add
+  input_methods:
+    direction_two: setDirectionTwo
+  input_attrs:
+    symmetric_one: isSymmetricInDirectionOne
+    symmetric_two: isSymmetricInDirectionTwo
+    distance_type: patternDistanceType
+  distance_types:
+    spacing: spacing
+    extent: extent
+
+sweep:
+  family_id: adsk.fusion.SweepFeatures
+  builder_input: createInput
+  builder_terminal: add
+  input_attrs:
+    guide_rail: guideRail
+    profile_scaling: profileScaling
+    direction_flipped: isDirectionFlipped
+    taper_angle: taperAngle
+    twist_angle: twistAngle
+
+loft:
+  family_id: adsk.fusion.LoftFeatures
+  builder_input: createInput
+  builder_terminal: add
+  input_attrs:
+    sections: loftSections
+    rails: centerLineOrRails
+    solid: isSolid
+    closed: isClosed
+    merge_tangent_edges: isTangentEdgesMerged
+    start_alignment: startLoftEdgeAlignment
+    end_alignment: endLoftEdgeAlignment
+  input_methods:
+    add_section: add
+
+patch:
+  family_id: adsk.fusion.PatchFeatures
+  builder_input: createInput
+  builder_terminal: add
+
+shell:
+  family_id: adsk.fusion.ShellFeatures
+  builder_input: createInput
+  builder_terminal: add
+  input_attrs:
+    inside_thickness: insideThickness
+    outside_thickness: outsideThickness
+    shell_type: shellType
+
+draft:
+  family_id: adsk.fusion.DraftFeatures
+  builder_input: createInput
+  builder_terminal: add
+  input_attrs:
+    direction_flipped: isDirectionFlipped
+  input_methods:
+    single_angle: setSingleAngle
+
+move:
+  family_id: adsk.fusion.MoveFeatures
+  builder_input: createInput2
+  builder_terminal: add
+  input_methods:
+    free_move: defineAsFreeMove
+
+offset:
+  family_id: adsk.fusion.OffsetFeatures
+  builder_input: createInput
+  builder_terminal: add
+
+replace_face:
+  family_id: adsk.fusion.ReplaceFaceFeatures
+  builder_input: createInput
+  builder_terminal: add
+
+scale:
+  family_id: adsk.fusion.ScaleFeatures
+  builder_input: createInput
+  builder_terminal: add
+  input_methods:
+    non_uniform: setToNonUniform
+
+split_body:
+  family_id: adsk.fusion.SplitBodyFeatures
+  builder_input: createInput
+  builder_terminal: add
+
+thread:
+  family_id: adsk.fusion.ThreadFeatures
+  builder_input: createInput
+  builder_terminal: add
+  input_attrs:
+    full_length: isFullLength
+    length: threadLength
+
+trim:
+  family_id: adsk.fusion.TrimFeatures
+  builder_input: createInput
+  builder_terminal: add
+  input_attrs:
+    cells: bRepCells
+  input_methods:
+    item: item

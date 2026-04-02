@@ -1,0 +1,7 @@
+# High-value builder family overrides.
+families:
+  ExtrudeFeatures:
+    compact_method: extrude
+    simple_method: addSimple
+    builder_input: createInput
+    builder_terminal: add

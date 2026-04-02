@@ -1,0 +1,21 @@
+{
+  "file_counts": {
+    "cpp_headers": 871,
+    "docs": 15242,
+    "processed_docs": 0,
+    "python_defs": 6
+  },
+  "generated_at": "2026-04-01T21:49:09Z",
+  "git_commit": "6f5edc3905ac6bbd2b759f5ce5fab32d67f6aebe",
+  "optional_paths": {
+    "generate_index": "corpus/FusionAPIReference/tools/generate_index.py",
+    "llms_txt": "corpus/FusionAPIReference/llms.txt",
+    "processed_docs": null
+  },
+  "required_paths": {
+    "cpp_headers": "corpus/FusionAPIReference/Fusion_API_CPP_Reference/include",
+    "docs": "corpus/FusionAPIReference/Fusion_API_Documentation/files",
+    "python_defs": "corpus/FusionAPIReference/Fusion_API_Python_Reference/defs"
+  },
+  "source_root": "corpus/FusionAPIReference"
+}

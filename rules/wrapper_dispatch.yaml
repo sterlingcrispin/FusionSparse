@@ -1,0 +1,5 @@
+# Maps Autodesk class symbols to compact wrapper classes.
+wrappers:
+  adsk.fusion.Component: compact.component.ComponentRef
+  adsk.fusion.Design: compact.design.DesignRef
+  adsk.fusion.Sketch: compact.sketch.SketchRef

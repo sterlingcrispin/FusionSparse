@@ -1,0 +1,30 @@
+# Human-friendly aliases for Autodesk enum members.
+aliases:
+  FeatureOperations:
+    join: JoinFeatureOperation
+    cut: CutFeatureOperation
+    intersect: IntersectFeatureOperation
+    new_body: NewBodyFeatureOperation
+    new_component: NewComponentFeatureOperation
+  ExtentDirections:
+    positive: PositiveExtentDirection
+    negative: NegativeExtentDirection
+    symmetric: SymmetricExtentDirection
+  HoleEdgePositions:
+    start: EdgeStartPointPosition
+    mid: EdgeMidPointPosition
+    end: EdgeEndPointPosition
+  PatternDistanceType:
+    spacing: SpacingPatternDistanceType
+    extent: ExtentPatternDistanceType
+  SweepProfileScalingOptions:
+    none: SweepProfileNoScalingOption
+    scale: SweepProfileScaleOption
+    stretch: SweepProfileStretchOption
+  LoftEdgeAlignments:
+    align: AlignEdgesLoftEdgeAlignment
+    surface: AlignToSurfaceLoftEdgeAlignment
+    free: FreeEdgesLoftEdgeAlignment
+  ShellTypes:
+    rounded: RoundedOffsetShellType
+    sharp: SharpOffsetShellType

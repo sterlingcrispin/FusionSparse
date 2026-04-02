@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fusion-sparse"
+version = "0.0.0"
+description = "Generated sparse compatibility layer for the Autodesk Fusion API."
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [{ name = "Sterling Crispin" }]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "pyyaml>=6.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["fusion_sparse*"]

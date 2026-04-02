@@ -1,0 +1,283 @@
+# Official-vs-compact sample-pair inputs.
+pairs:
+  - id: simple_extrusion_sample
+    title: Simple Extrusion Sample
+    source_page: SimpleExtrusionSample_Sample.htm
+    official_generation:
+      mode: doc_run
+    view: iso-top-right
+  - id: extrude_features_add_simple
+    title: extrudeFeatures.addSimple
+    source_page: extrudeFeatures_addSimple_Sample.htm
+    official_script: tests/integration/sample_pairs/official/extrude_features_add_simple.py
+    view: iso-top-right
+  - id: extrude_feature_one_side
+    title: Extrude Feature API Sample (One Side)
+    source_page: ExtrudeFeatureSample_Sample.htm
+    official_script: tests/integration/sample_pairs/official/extrude_feature_one_side.py
+    view: iso-top-right
+  - id: extrude_feature_symmetric
+    title: Extrude Feature API Sample (Symmetric)
+    source_page: ExtrudeFeatureSample_Sample.htm
+    official_script: tests/integration/sample_pairs/official/extrude_feature_symmetric.py
+    view: iso-top-right
+  - id: extrude_feature_through_all
+    title: extrudeFeatures.add using ThroughAllExtent
+    source_page: extrudeFeaturesThroughAllExtent_add_Sample.htm
+    official_script: tests/integration/sample_pairs/official/extrude_feature_through_all.py
+    view: iso-top-right
+  - id: circle_by_center_radius
+    title: Create circle by center and radius API Sample
+    source_page: CircleByCenterRadius_Sample.htm
+    official_generation:
+      mode: doc_run
+    view: iso-top-right
+  - id: sketch_lines_add_by_two_points
+    title: SketchLines.addByTwoPoints
+    source_page: SketchLines_addByTwoPoints_Sample.htm
+    official_generation:
+      mode: doc_demo_sketch
+    view: top
+  - id: sketch_lines_add_two_point_rectangle
+    title: SketchLines.addTwoPointRectangle
+    source_page: SketchLines_addTwoPointRectangle_Sample.htm
+    official_generation:
+      mode: doc_demo_sketch
+    view: top
+  - id: sketch_lines_add_center_point_rectangle
+    title: SketchLines.addCenterPointRectangle
+    source_page: SketchLines_addCenterPointRectangle_Sample.htm
+    official_generation:
+      mode: doc_demo_sketch
+    view: top
+  - id: sketch_lines_add_three_point_rectangle
+    title: SketchLines.addThreePointRectangle
+    source_page: SketchLines_addThreePointRectangle_Sample.htm
+    official_generation:
+      mode: doc_demo_sketch
+    view: top
+  - id: sketch_circles_add_by_two_points
+    title: SketchCircles.addByTwoPoints
+    source_page: SketchCircles_addByTwoPoints_Sample.htm
+    official_generation:
+      mode: doc_demo_sketch
+    view: top
+  - id: sketch_circles_add_by_three_points
+    title: SketchCircles.addByThreePoints
+    source_page: SketchCircles_addByThreePoints_Sample.htm
+    official_generation:
+      mode: doc_demo_sketch
+    view: top
+  - id: sketch_arcs_add_by_center_start_sweep
+    title: SketchArcs.addByCenterStartSweep
+    source_page: SketchArcs_addByCenterStartaSweep_Sample.htm
+    official_generation:
+      mode: doc_demo_sketch
+    view: top
+  - id: sketch_arcs_add_by_three_points
+    title: SketchArcs.addByThreePoints
+    source_page: SketchArcs_addByThreePoints_Sample.htm
+    official_generation:
+      mode: doc_demo_sketch
+    view: top
+  - id: sketch_point_add
+    title: SketchPoints.add
+    source_page: SketchPoint_add_Sample.htm
+    official_generation:
+      mode: doc_demo_sketch
+    view: top
+  - id: sketch_ellipses_add
+    title: SketchEllipses.add
+    source_page: SketchEllipses_add_Sample.htm
+    official_generation:
+      mode: doc_demo_sketch
+    view: top
+  - id: sketch_fitted_splines_add
+    title: SketchFittedSplines.add
+    source_page: SketchFittedSplines_add_Sample.htm
+    official_generation:
+      mode: doc_demo_sketch
+    view: top
+  - id: sketch_text_multiline
+    title: SketchTextInput.setAsMultiLine
+    source_page: SketchTextInput_setAsMultiLine_Sample.htm
+    official_generation:
+      mode: doc_demo_sketch
+    view: top
+  - id: sketch_text_along_path
+    title: SketchTextInput.setAsAlongPath
+    source_page: SketchTextinput_setAsAlongPath_Sample.htm
+    official_generation:
+      mode: doc_demo_sketch
+    view: top
+  - id: sketch_text_fit_on_path
+    title: SketchTextInput.setAsFitOnPath
+    source_page: SketchTextInput_setAsFitOnPath_Sample.htm
+    official_generation:
+      mode: doc_demo_sketch
+    view: top
+  - id: construction_plane_sample
+    title: Construction Plane API Sample
+    source_page: ConstructionPlaneSample_Sample.htm
+    official_script: tests/integration/sample_pairs/official/construction_plane_sample.py
+    view: iso-top-right
+  - id: construction_axis_sample
+    title: Construction Axis API Sample
+    source_page: ConstructionAxisSample_Sample.htm
+    official_script: tests/integration/sample_pairs/official/construction_axis_sample.py
+    view: iso-top-right
+  - id: construction_point_sample
+    title: Construction Point API Sample
+    source_page: ConstructionPointSample_Sample.htm
+    official_script: tests/integration/sample_pairs/official/construction_point_sample.py
+    view: iso-top-right
+  - id: simple_revolve_feature_sample
+    title: Simple Revolve Feature Sample
+    source_page: SimpleRevolveFeatureSample_Sample.htm
+    official_script: tests/integration/sample_pairs/official/simple_revolve_feature_sample.py
+    view: iso-top-right
+  - id: revolve_features_add
+    title: revolveFeatures.add
+    source_page: revolveFeatures_add_Sample.htm
+    official_script: tests/integration/sample_pairs/official/revolve_features_add.py
+    view: iso-top-right
+  - id: hole_feature_sample
+    title: Hole Feature API Sample
+    source_page: HoleFeatureSample_Sample.htm
+    official_script: tests/integration/sample_pairs/official/hole_feature_sample.py
+    view: iso-top-right
+  - id: hole_features_add
+    title: holeFeatures.add
+    source_page: holeFeatures_add_Sample.htm
+    official_script: tests/integration/sample_pairs/official/hole_features_add.py
+    view: iso-top-right
+  - id: hole_features_counterbore_add
+    title: holeFeatures.add with Counterbore
+    source_page: holeFeaturesCounterBore_add_Sample.htm
+    official_script: tests/integration/sample_pairs/official/hole_features_counterbore_add.py
+    view: iso-top-right
+  - id: hole_features_countersink_add
+    title: holeFeatures.add with Countersink
+    source_page: holeFeaturesCounterSink_add_Sample.htm
+    official_script: tests/integration/sample_pairs/official/hole_features_countersink_add.py
+    view: iso-top-right
+  - id: constant_radius_fillet
+    title: Constant Radius Fillet API Sample
+    source_page: ConstantRadiusFillet_Sample.htm
+    official_script: tests/integration/sample_pairs/official/constant_radius_fillet.py
+    view: iso-top-right
+  - id: fillet_features_add
+    title: filletFeatures.add
+    source_page: filletFeatures_add_Sample.htm
+    official_script: tests/integration/sample_pairs/official/fillet_features_add.py
+    view: iso-top-right
+  - id: equal_distance_chamfer_feature
+    title: Equal Distance Chamfer Feature API Sample
+    source_page: EqualDistanceChamferFeature_Sample.htm
+    official_script: tests/integration/sample_pairs/official/equal_distance_chamfer_feature.py
+    view: iso-top-right
+  - id: chamfer_features_add
+    title: chamferFeatures.add
+    source_page: chamferFeatures_add_Sample.htm
+    official_script: tests/integration/sample_pairs/official/chamfer_features_add.py
+    view: iso-top-right
+  - id: combine_features_add
+    title: combineFeatures.add
+    source_page: combineFeatures_add_Sample.htm
+    official_script: tests/integration/sample_pairs/official/combine_features_add.py
+    view: iso-top-right
+  - id: mirror_features_add
+    title: mirrorFeatures.add
+    source_page: mirrorFeatures_add_Sample.htm
+    official_script: tests/integration/sample_pairs/official/mirror_features_add.py
+    view: iso-top-right
+  - id: circular_pattern_features_add
+    title: circularPatternFeatures.add
+    source_page: circularPatternFeatures_add_Sample.htm
+    official_script: tests/integration/sample_pairs/official/circular_pattern_features_add.py
+    view: iso-top-right
+  - id: circular_pattern_feature_sample
+    title: Circular Pattern Feature API Sample
+    source_page: CircularPatternFeatureSample_Sample.htm
+    official_script: tests/integration/sample_pairs/official/circular_pattern_feature_sample.py
+    view: iso-top-right
+  - id: rectangular_pattern_features_add
+    title: rectangularPatternFeatures.add
+    source_page: rectangularPatter_add_Sample.htm
+    official_script: tests/integration/sample_pairs/official/rectangular_pattern_features_add.py
+    view: iso-top-right
+  - id: rectangular_pattern_feature_sample
+    title: Rectangular Pattern Feature API Sample
+    source_page: RectangularPatternFeatureSample_Sample.htm
+    official_script: tests/integration/sample_pairs/official/rectangular_pattern_feature_sample.py
+    view: iso-top-right
+  - id: sweep_feature_sample
+    title: Sweep Feature API Sample
+    source_page: SweepFeatureSample_Sample.htm
+    official_script: tests/integration/sample_pairs/official/sweep_feature_sample.py
+    view: iso-top-right
+  - id: sweep_with_guide_rail_feature_sample
+    title: Sweep with Guide Rail Feature API Sample
+    source_page: SweepWithGuideRailFeatureSample_Sample.htm
+    official_script: tests/integration/sample_pairs/official/sweep_with_guide_rail_feature_sample.py
+    view: iso-top-right
+  - id: two_rail_sweep_feature_sample
+    title: Two Rail Sweep Feature API Sample
+    source_page: TwoRailSweepFeatureSample_Sample.htm
+    official_script: tests/integration/sample_pairs/official/two_rail_sweep_feature_sample.py
+    view: iso-top-right
+  - id: loft_feature_sample
+    title: Loft Feature API Sample
+    source_page: LoftFeatureSample_Sample.htm
+    official_script: tests/integration/sample_pairs/official/loft_feature_sample.py
+    view: iso-top-right
+  - id: patch_feature_sample
+    title: Patch Feature API Sample
+    source_page: PatchFeatureSample_Sample.htm
+    official_script: tests/integration/sample_pairs/official/patch_feature_sample.py
+    view: iso-top-right
+  - id: shell_feature_sample
+    title: Shell Feature API Sample
+    source_page: ShellFeatureSample_Sample.htm
+    official_script: tests/integration/sample_pairs/official/shell_feature_sample.py
+    view: iso-top-right
+  - id: draft_feature_sample
+    title: Draft Feature API Sample
+    source_page: DraftFeatureSample_Sample.htm
+    official_script: tests/integration/sample_pairs/official/draft_feature_sample.py
+    view: iso-top-right
+  - id: move_feature_sample
+    title: Move Feature API Sample
+    source_page: MoveFeatureSample_Sample.htm
+    official_script: tests/integration/sample_pairs/official/move_feature_sample.py
+    view: iso-top-right
+  - id: offset_feature_sample
+    title: Offset Feature API Sample
+    source_page: OffsetFeatureSample_Sample.htm
+    official_script: tests/integration/sample_pairs/official/offset_feature_sample.py
+    view: iso-top-right
+  - id: replace_face_feature_sample
+    title: Replace Face Feature API Sample
+    source_page: ReplaceFaceFeatureSample_Sample.htm
+    official_script: tests/integration/sample_pairs/official/replace_face_feature_sample.py
+    view: iso-top-right
+  - id: scale_feature_sample
+    title: Scale Feature API Sample
+    source_page: ScaleFeatureSample_Sample.htm
+    official_script: tests/integration/sample_pairs/official/scale_feature_sample.py
+    view: iso-top-right
+  - id: split_body_feature_sample
+    title: Split Body Feature API Sample
+    source_page: SplitBodyFeatureSample_Sample.htm
+    official_script: tests/integration/sample_pairs/official/split_body_feature_sample.py
+    view: iso-top-right
+  - id: thread_feature_sample
+    title: Thread Feature API Sample
+    source_page: ThreadFeatureSample_Sample.htm
+    official_script: tests/integration/sample_pairs/official/thread_feature_sample.py
+    view: iso-top-right
+  - id: trim_feature_sample
+    title: Trim Feature API Sample
+    source_page: TrimFeatureSample_Sample.htm
+    official_script: tests/integration/sample_pairs/official/trim_feature_sample.py
+    view: iso-top-right

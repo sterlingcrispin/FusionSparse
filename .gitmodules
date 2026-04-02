@@ -1,0 +1,4 @@
+[submodule "corpus/FusionAPIReference"]
+	path = corpus/FusionAPIReference
+	url = https://github.com/AutodeskFusion360/FusionAPIReference.git
+	branch = main

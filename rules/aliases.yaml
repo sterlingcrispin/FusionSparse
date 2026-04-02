@@ -1,0 +1,14 @@
+# Compact export aliases.
+exports:
+  app: compact.app.app
+  ctx: compact.app.ctx
+  dir: runtime.enums.dir
+  new_design: compact.app.new_design
+  new_or_active_design: compact.app.new_or_active_design
+  oc: runtime.geom.oc
+  op: runtime.enums.op
+  p: runtime.geom.p
+  u: runtime.values.u
+  ui: compact.app.ui
+  v: runtime.values.v
+  vec: runtime.geom.vec

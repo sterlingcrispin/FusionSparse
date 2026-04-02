@@ -1,0 +1,13 @@
+{
+  "autodeskProduct": "Fusion",
+  "type": "addin",
+  "id": "com.sterlingcrispin.fusionsparse.workbench",
+  "author": "Sterling Crispin",
+  "description": {
+    "": "Registers a FusionSparse smoke command inside Fusion for add-in validation."
+  },
+  "version": "0.0.0",
+  "supportedOS": "windows|mac",
+  "runOnStartup": false,
+  "editEnabled": true
+}

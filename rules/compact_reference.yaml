@@ -1,0 +1,434 @@
+# Generated compact reference input.
+exports:
+  app:
+    raw_mapping: adsk.core.Application.get
+    arguments: []
+    example: |
+      app = fs.app()
+    escape_hatch: Returns a wrapped Autodesk Application. Use `.raw` for the original object.
+  ui:
+    raw_mapping: adsk.core.Application.userInterface
+    arguments: []
+    example: |
+      ui = fs.ui()
+    escape_hatch: Returns a wrapped Autodesk UserInterface. Use `.raw` for the original object.
+  ctx:
+    raw_mapping: adsk.core.Application active context
+    arguments:
+      - strict=True
+    example: |
+      context = fs.ctx()
+      root = context.root
+    escape_hatch: The fields on the returned context are wrapped Autodesk objects; each field supports `.raw`.
+  new_design:
+    raw_mapping: adsk.core.Documents.add(FusionDesignDocumentType)
+    arguments:
+      - visible=True
+      - options=None
+    example: |
+      design = fs.new_design()
+    escape_hatch: Returns a wrapped Design. Use `.raw` to drop to Autodesk APIs directly.
+  new_or_active_design:
+    raw_mapping: adsk.core.Application.activeProduct or adsk.core.Documents.add(FusionDesignDocumentType)
+    arguments: []
+    example: |
+      design = fs.new_or_active_design()
+    escape_hatch: Returns a wrapped Design. Use `.raw` to drop to Autodesk APIs directly.
+  p:
+    raw_mapping: adsk.core.Point3D.create
+    arguments:
+      - x
+      - y=None
+      - z=0
+    example: |
+      center = fs.p(0, 0, 0)
+    escape_hatch: Pass an Autodesk Point3D directly to keep it unchanged.
+  vec:
+    raw_mapping: adsk.core.Vector3D.create
+    arguments:
+      - x
+      - y=None
+      - z=0
+    example: |
+      axis = fs.vec(0, 0, 1)
+    escape_hatch: Pass an Autodesk Vector3D directly to keep it unchanged.
+  oc:
+    raw_mapping: adsk.core.ObjectCollection.create
+    arguments:
+      - "*items"
+    example: |
+      bodies = fs.oc(body_a, body_b)
+    escape_hatch: Wrapped FusionSparse refs are unwrapped automatically when inserted.
+  u:
+    raw_mapping: adsk.core.ValueInput.createByString via fs.v
+    arguments: []
+    example: |
+      depth = fs.u.mm(10)
+    escape_hatch: "`u` only builds expressions; call `v(...)` to create a ValueInput."
+  v:
+    raw_mapping: adsk.core.ValueInput.createByString/createByReal/createByBoolean/createByObject
+    arguments:
+      - value
+    example: |
+      depth = fs.v("10 mm")
+    escape_hatch: Existing Autodesk ValueInput objects pass through unchanged.
+  op:
+    raw_mapping: adsk.fusion.FeatureOperations
+    arguments: []
+    example: |
+      operation = fs.op.new_body
+    escape_hatch: Use the Autodesk enum directly if you need a member that does not have a compact alias.
+  dir:
+    raw_mapping: adsk.fusion.ExtentDirections
+    arguments: []
+    example: |
+      direction = fs.dir.symmetric
+    escape_hatch: Use the Autodesk enum directly if you need a member that does not have a compact alias.
+
+methods:
+  DesignRef.root:
+    raw_mapping: adsk.fusion.Design.rootComponent
+    arguments: []
+    example: |
+      root = fs.new_design().root
+    escape_hatch: The returned Component wrapper exposes `.raw` for the Autodesk Component.
+  ComponentRef.sketch:
+    raw_mapping: adsk.fusion.Sketches.add
+    arguments:
+      - plane
+    example: |
+      sk = root.sketch("xy")
+    escape_hatch: Pass a raw construction plane or planar face instead of an alias to bypass plane lookup.
+  ComponentRef.extrude:
+    raw_mapping: adsk.fusion.ExtrudeFeatures.addSimple or createInput + add
+    arguments:
+      - profile
+      - distance=None
+      - op="new_body"
+    example: |
+      ext = root.extrude(sk.profile(), "10 mm")
+    escape_hatch: Use `root.raw.features.extrudeFeatures` for direct Autodesk feature creation.
+  SketchRef.line:
+    raw_mapping: adsk.fusion.SketchLines.addByTwoPoints
+    arguments:
+      - a
+      - b
+    example: |
+      sk.line((0, 0), (5, 0))
+    escape_hatch: Points are passed through unchanged if they are already Autodesk sketch points or Point3D values.
+  SketchRef.point:
+    raw_mapping: adsk.fusion.SketchPoints.add
+    arguments:
+      - at
+    example: |
+      pt = sk.point((5, 4))
+    escape_hatch: Pass a raw Autodesk Point3D or SketchPoint directly to bypass coordinate coercion.
+  SketchRef.circle:
+    raw_mapping: adsk.fusion.SketchCircles.addByCenterRadius
+    arguments:
+      - center
+      - r
+    example: |
+      sk.circle((0, 0), "20 mm")
+    escape_hatch: Radius strings are parsed into Fusion internal length units; pass a numeric radius directly to skip parsing.
+  SketchRef.arc:
+    raw_mapping: adsk.fusion.SketchArcs.addByCenterStartSweep
+    arguments:
+      - center
+      - start
+      - sweep
+    example: |
+      sk.arc((0, 0), (5, 0), "90 deg")
+    escape_hatch: Pass Autodesk points directly if you already have them.
+  SketchRef.arc3p:
+    raw_mapping: adsk.fusion.SketchArcs.addByThreePoints
+    arguments:
+      - a
+      - b
+      - c
+    example: |
+      sk.arc3p((-10, 0), (-5, 3), (0, 0))
+    escape_hatch: Pass Autodesk points directly if you already have them.
+  SketchRef.ellipse:
+    raw_mapping: adsk.fusion.SketchEllipses.add
+    arguments:
+      - center
+      - major
+      - through
+    example: |
+      sk.ellipse((0, 0), (10, 0), (5, 4))
+    escape_hatch: Pass Autodesk points directly if you already have them.
+  SketchRef.spline:
+    raw_mapping: adsk.fusion.SketchFittedSplines.add
+    arguments:
+      - "*fit_points"
+    example: |
+      sk.spline((0, 0), (5, 1), (7, 6), (0, 1))
+    escape_hatch: Pass an Autodesk ObjectCollection or any iterable of point-like values.
+  SketchRef.rect:
+    raw_mapping: adsk.fusion.SketchLines.addTwoPointRectangle
+    arguments:
+      - a
+      - b
+    example: |
+      sk.rect((0, 0), (10, 5))
+    escape_hatch: Pass Autodesk points directly if you already have them.
+  SketchRef.rect_center:
+    raw_mapping: adsk.fusion.SketchLines.addCenterPointRectangle
+    arguments:
+      - center
+      - corner
+    example: |
+      sk.rect_center((5, 5), (25, 25))
+    escape_hatch: Pass Autodesk points directly if you already have them.
+  SketchRef.rect3p:
+    raw_mapping: adsk.fusion.SketchLines.addThreePointRectangle
+    arguments:
+      - a
+      - b
+      - c
+    example: |
+      sk.rect3p((0, 0), (5, 15), (-5, -6))
+    escape_hatch: Pass Autodesk points directly if you already have them.
+  SketchRef.circle2p:
+    raw_mapping: adsk.fusion.SketchCircles.addByTwoPoints
+    arguments:
+      - a
+      - b
+    example: |
+      sk.circle2p((1, 1), (8, 8))
+    escape_hatch: Pass Autodesk points directly if you already have them.
+  SketchRef.circle3p:
+    raw_mapping: adsk.fusion.SketchCircles.addByThreePoints
+    arguments:
+      - a
+      - b
+      - c
+    example: |
+      sk.circle3p((0, 0), (5, 5), (9, 14))
+    escape_hatch: Pass Autodesk points directly if you already have them.
+  SketchRef.text:
+    raw_mapping: adsk.fusion.SketchTexts.createInput2 + SketchTextInput.setAsMultiLine + SketchTexts.add
+    arguments:
+      - text
+      - corner
+      - diagonal
+      - height
+    example: |
+      sk.text("Autodesk", (0, 0), (10, 5), 0.5)
+    escape_hatch: Use `sk.raw.sketchTexts` directly for advanced text-input options not exposed compactly.
+  SketchRef.text_path:
+    raw_mapping: adsk.fusion.SketchTexts.createInput2 + SketchTextInput.setAsAlongPath + SketchTexts.add
+    arguments:
+      - text
+      - path
+      - height
+    example: |
+      sk.text_path("Autodesk", arc, 0.5)
+    escape_hatch: Use `sk.raw.sketchTexts` directly for advanced text-input options not exposed compactly.
+  SketchRef.text_fit:
+    raw_mapping: adsk.fusion.SketchTexts.createInput2 + SketchTextInput.setAsFitOnPath + SketchTexts.add
+    arguments:
+      - text
+      - path
+      - height
+    example: |
+      sk.text_fit("Autodesk", arc, 0.5)
+    escape_hatch: Use `sk.raw.sketchTexts` directly for advanced text-input options not exposed compactly.
+  SketchRef.profile:
+    raw_mapping: adsk.fusion.Sketch.profiles.item
+    arguments:
+      - i=0
+    example: |
+      profile = sk.profile()
+    escape_hatch: Use `sk.raw.profiles` for direct access to the Autodesk Profiles collection.
+  SketchRef.profiles:
+    raw_mapping: adsk.fusion.Sketch.profiles
+    arguments: []
+    example: |
+      profiles = sk.profiles()
+    escape_hatch: Use `sk.raw.profiles` for direct access to the Autodesk Profiles collection.
+  ExtrudeBuilder.one_side:
+    raw_mapping: adsk.fusion.ExtrudeFeatureInput.setOneSideExtent
+    arguments:
+      - distance
+      - direction="positive"
+    example: |
+      ext = root.extrude(sk.profile()).one_side("5 mm")
+    escape_hatch: Use `builder.raw` to call Autodesk extent setters directly.
+  ExtrudeBuilder.symmetric:
+    raw_mapping: adsk.fusion.ExtrudeFeatureInput.setSymmetricExtent
+    arguments:
+      - distance
+    example: |
+      ext = root.extrude(sk.profile()).symmetric("10 mm")
+    escape_hatch: Use `builder.raw` to call Autodesk extent setters directly.
+  ExtrudeBuilder.solid:
+    raw_mapping: adsk.fusion.ExtrudeFeatureInput.isSolid
+    arguments:
+      - flag=True
+    example: |
+      ext = root.extrude(sk.profile()).solid()
+    escape_hatch: Use `builder.raw.isSolid` for direct Autodesk access.
+  ExtrudeBuilder.surface:
+    raw_mapping: adsk.fusion.ExtrudeFeatureInput.isSolid = False
+    arguments: []
+    example: |
+      ext = root.extrude(sk.profile()).surface()
+    escape_hatch: Use `builder.raw.isSolid` for direct Autodesk access.
+  ExtrudeBuilder.taper:
+    raw_mapping: taper angle argument on Autodesk extent setters
+    arguments:
+      - angle
+    example: |
+      ext = root.extrude(sk.profile()).one_side("5 mm").taper("2 deg")
+    escape_hatch: Use `builder.raw` and Autodesk extent setters directly for advanced taper control.
+  ExtrudeBuilder.participant_bodies:
+    raw_mapping: adsk.fusion.ExtrudeFeatureInput.participantBodies
+    arguments:
+      - "*bodies"
+    example: |
+      ext = root.extrude(sk.profile()).participant_bodies(body)
+    escape_hatch: Use `builder.raw.participantBodies` for direct Autodesk access.
+  ExtrudeBuilder.build:
+    raw_mapping: adsk.fusion.ExtrudeFeatures.add
+    arguments: []
+    example: |
+      ext = root.extrude(sk.profile()).one_side("5 mm").build()
+    escape_hatch: Call `builder.raw` with Autodesk feature collections directly if you need unsupported setup.
+  ComponentRef.revolve:
+    raw_mapping: adsk.fusion.RevolveFeatures.createInput + setAngleExtent + add
+    arguments:
+      - profile
+      - axis
+      - angle=None
+      - op="new_body"
+    example: |
+      rev = root.revolve(sk.profile(), axis, "180 deg")
+    escape_hatch: Use `root.raw.features.revolveFeatures` for direct Autodesk revolve configuration.
+  ComponentRef.sweep:
+    raw_mapping: adsk.fusion.Features.createPath + adsk.fusion.SweepFeatures.createInput + add
+    arguments:
+      - profile
+      - path
+      - op="new_body"
+      - guide=None
+      - taper=None
+      - twist=None
+      - scale=None
+      - flip=False
+    example: |
+      swp = root.sweep(sk.profile(), path, taper="5 deg", twist="10 deg")
+    escape_hatch: Use `root.raw.features.sweepFeatures` and raw Path objects for unsupported sweep options.
+  ComponentRef.loft:
+    raw_mapping: adsk.fusion.LoftFeatures.createInput + LoftSections.add + add
+    arguments:
+      - "*sections"
+      - op="new_body"
+      - solid=False
+      - closed=False
+      - merge_tangent_edges=True
+      - start_alignment="free"
+      - end_alignment="free"
+      - rails=None
+    example: |
+      loft = root.loft(profile0, profile1, profile2)
+    escape_hatch: Use `root.raw.features.loftFeatures` when you need unsupported section or rail behavior.
+  ComponentRef.patch:
+    raw_mapping: adsk.fusion.PatchFeatures.createInput + add
+    arguments:
+      - boundary
+      - op="new_body"
+    example: |
+      patch = root.patch(boundary_edge)
+    escape_hatch: Use `root.raw.features.patchFeatures` for direct Autodesk patch setup.
+  ComponentRef.shell:
+    raw_mapping: adsk.fusion.ShellFeatures.createInput + add
+    arguments:
+      - entities
+      - inside=None
+      - outside=None
+      - tangent_chain=True
+      - shell_type="sharp"
+    example: |
+      shell = root.shell(face, inside=0.5, tangent_chain=False)
+    escape_hatch: Use `root.raw.features.shellFeatures` for Autodesk shell options not exposed compactly.
+  ComponentRef.draft:
+    raw_mapping: adsk.fusion.DraftFeatures.createInput + setSingleAngle + add
+    arguments:
+      - faces
+      - plane
+      - angle
+      - tangent_chain=True
+      - symmetric=True
+      - flip=False
+    example: |
+      draft = root.draft([side_face], neutral_face, "10 deg")
+    escape_hatch: Use `root.raw.features.draftFeatures` for Autodesk draft setups beyond the single-angle path.
+  ComponentRef.move:
+    raw_mapping: adsk.fusion.MoveFeatures.createInput2 + defineAsFreeMove + add
+    arguments:
+      - entities
+      - translation=None
+      - transform=None
+    example: |
+      moved = root.move(body, translation=(2, 1, 0))
+    escape_hatch: Pass a raw `Matrix3D` as `transform=` to bypass the compact translation helper.
+  ComponentRef.offset:
+    raw_mapping: adsk.fusion.OffsetFeatures.createInput + add
+    arguments:
+      - entities
+      - distance
+      - op="new_body"
+      - chain=True
+    example: |
+      offset = root.offset(face, "2 mm")
+    escape_hatch: Use `root.raw.features.offsetFeatures` if you need Autodesk-only offset options.
+  ComponentRef.replace_face:
+    raw_mapping: adsk.fusion.ReplaceFaceFeatures.createInput + add
+    arguments:
+      - source_faces
+      - target
+      - tangent_chain=False
+    example: |
+      replaced = root.replace_face(end_face, offset_plane)
+    escape_hatch: Use `root.raw.features.replaceFaceFeatures` for Autodesk replace-face options not surfaced compactly.
+  ComponentRef.scale:
+    raw_mapping: adsk.fusion.ScaleFeatures.createInput + setToNonUniform + add
+    arguments:
+      - entities
+      - origin
+      - factor
+      - xyz=None
+    example: |
+      scaled = root.scale(body, (0, 0, 0), 1, xyz=(1.5, 0.75, 0.5))
+    escape_hatch: Pass a raw Autodesk point for `origin` or use `root.raw.features.scaleFeatures` for advanced scaling behavior.
+  ComponentRef.split_body:
+    raw_mapping: adsk.fusion.SplitBodyFeatures.createInput + add
+    arguments:
+      - bodies
+      - tool
+      - extend=True
+    example: |
+      split = root.split_body(body, "xz")
+    escape_hatch: Use `root.raw.features.splitBodyFeatures` for Autodesk split-body control beyond the direct helper.
+  ComponentRef.thread:
+    raw_mapping: adsk.fusion.ThreadFeatures.threadDataQuery + ThreadInfo.create + createInput + add
+    arguments:
+      - faces
+      - internal=False
+      - length=None
+      - thread_type=None
+      - designation=None
+      - thread_class=None
+    example: |
+      thread = root.thread(side_face, length=2.5)
+    escape_hatch: Use `root.raw.features.threadFeatures` if you need to manage Autodesk thread-query data directly.
+  ComponentRef.trim:
+    raw_mapping: adsk.fusion.TrimFeatures.createInput + TrimFeatureInput.bRepCells + add
+    arguments:
+      - tool
+      - cell=0
+    example: |
+      trimmed = root.trim(surface_body)
+    escape_hatch: Use `root.raw.features.trimFeatures` if you need to inspect or select Autodesk trim cells manually.

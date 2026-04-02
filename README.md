@@ -1,0 +1,68 @@
+# FusionSparse
+
+FusionSparse is a generator-driven Python layer for the Autodesk Fusion API.
+
+The project keeps the full raw `adsk.*` surface reachable while generating a smaller, cleaner, more token-sparse interface for common Design workspace workflows.
+
+## Goals
+
+- Keep raw Fusion access available at all times.
+- Generate as much surface area as possible from Autodesk's official API corpus.
+- Make common modeling code much shorter and easier for agents to read and write.
+- Keep updates mechanical: refresh corpus, rebuild IR, regenerate artifacts, review diffs.
+
+## Current scope
+
+FusionSparse is focused on the Design workspace, not the whole Fusion app.
+
+Current compact coverage includes:
+- context/bootstrap
+- sketches
+- construction planes / axes / points
+- extrude / revolve / sweep / loft / patch
+- shell / draft / hole / fillet / chamfer
+- combine / mirror / circular pattern / rectangular pattern
+- move / offset / replace face / scale / split body / thread / trim
+
+Everything else remains available through raw `adsk.*` access and `.raw`.
+
+## Status
+
+- generator pipeline is working end to end
+- Autodesk corpus is pinned as a submodule
+- IR build, diff, and regeneration are in place
+- Fusion deployment exists for both scripts and add-ins
+- official-vs-compact validation runs in real Fusion through MCP
+
+Current proof points:
+- `53/53` official-vs-compact sample pairs matched in real Fusion
+- paired samples are `61.9%` smaller by characters and `52.7%` smaller by estimated tokens
+- Design-workspace validated families: `41`
+
+## Repo shape
+
+- [src/fusion_sparse](src/fusion_sparse): shipped library
+- [tools](tools): parsers, generators, reporting, validation
+- [rules](rules): handwritten policy
+- [corpus/FusionAPIReference](corpus/FusionAPIReference): pinned Autodesk source corpus
+- [fusion](fusion): Fusion script/add-in deployment assets
+- [tests](tests): unit and integration coverage
+
+## Useful commands
+
+```bash
+python -m tools.cli build-ir
+python -m tools.cli generate --skip-build-ir
+python -m tools.cli run-sample-pairs
+python -m tools.cli map-coverage
+python -m unittest discover -s tests/unit -p 'test_*.py'
+```
+
+## Generated docs and reports
+
+- [compact_reference.md](docs/compact_reference.md)
+- [raw_mapping.md](docs/raw_mapping.md)
+- [update_workflow.md](docs/update_workflow.md)
+- `build/reports/api_coverage_map.md`
+- `build/reports/design_workspace_backlog.md`
+- `build/reports/sample_pairs/sample_pairs_report.md`

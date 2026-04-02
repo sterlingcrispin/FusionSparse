@@ -1,0 +1,35 @@
+"""Generated wrapper dispatch metadata. Do not edit by hand."""
+
+from __future__ import annotations
+
+import json as _json
+
+WRAPPER_CLASS_PATHS = _json.loads('{"Component":["fusion_sparse.compact.component","ComponentRef"],"Design":["fusion_sparse.compact.design","DesignRef"],"Sketch":["fusion_sparse.compact.sketch","SketchRef"],"adsk.fusion.Component":["fusion_sparse.compact.component","ComponentRef"],"adsk.fusion.Design":["fusion_sparse.compact.design","DesignRef"],"adsk.fusion.Sketch":["fusion_sparse.compact.sketch","SketchRef"],"adsk::fusion::Component":["fusion_sparse.compact.component","ComponentRef"],"adsk::fusion::Design":["fusion_sparse.compact.design","DesignRef"],"adsk::fusion::Sketch":["fusion_sparse.compact.sketch","SketchRef"]}')
+
+
+def resolve_wrapper_class(raw_obj):
+    from importlib import import_module
+
+    from fusion_sparse.runtime._adsk import class_type_name, object_type_name
+    from fusion_sparse.runtime.errors import GenerationMismatchError
+    from fusion_sparse.runtime.refs import Ref
+
+    for key in filter(None, (object_type_name(raw_obj), class_type_name(raw_obj), type(raw_obj).__name__)):
+        path = WRAPPER_CLASS_PATHS.get(key)
+        if not path:
+            continue
+        module_name, class_name = path
+        try:
+            module = import_module(module_name)
+        except ImportError as exc:
+            raise GenerationMismatchError(f"Configured wrapper module could not be imported: {module_name}") from exc
+        try:
+            wrapper_cls = getattr(module, class_name)
+        except AttributeError as exc:
+            raise GenerationMismatchError(
+                f"Configured wrapper class could not be resolved: {module_name}.{class_name}"
+            ) from exc
+        if not isinstance(wrapper_cls, type) or not issubclass(wrapper_cls, Ref):
+            raise GenerationMismatchError(f"Configured wrapper is not a Ref subclass: {module_name}.{class_name}")
+        return wrapper_cls
+    return Ref
