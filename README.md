@@ -39,6 +39,58 @@ Current proof points:
 - paired samples are `61.9%` smaller by characters and `52.7%` smaller by estimated tokens
 - Design-workspace validated families: `41`
 
+## Example
+
+This is a real Autodesk sample workflow from `extrudeFeatures_addSimple_Sample.htm`, compared with the FusionSparse remake that produces the same result in real Fusion.
+
+Official Autodesk style:
+
+```python
+import adsk.core
+import adsk.fusion
+
+def run(context):
+    app = adsk.core.Application.get()
+    app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+    design = adsk.fusion.Design.cast(app.activeProduct)
+
+    root_comp = design.rootComponent
+    sketch = root_comp.sketches.add(root_comp.xYConstructionPlane)
+    lines = sketch.sketchCurves.sketchLines
+    lines.addTwoPointRectangle(adsk.core.Point3D.create(0, 0, 0), adsk.core.Point3D.create(3, 2, 0))
+
+    profile = sketch.profiles.item(0)
+    distance = adsk.core.ValueInput.createByString("100 mm")
+    operation = adsk.fusion.FeatureOperations.NewBodyFeatureOperation
+    extrude_features = root_comp.features.extrudeFeatures
+    extrude_features.addSimple(profile, distance, operation)
+```
+
+FusionSparse:
+
+```python
+import fusion_sparse as fx
+
+def run(context):
+    design = fx.new_design()
+    root = design.root
+    sketch = root.sketch("xy")
+    sketch.rect((0, 0), (3, 2))
+    profile = sketch.profile()
+    root.extrude(profile, "100 mm")
+```
+
+Measured on this exact validated pair:
+- lines: `23 -> 13` (`43.5%` smaller)
+- characters: `871 -> 342` (`60.7%` smaller)
+- estimated tokens: `176 -> 82` (`53.4%` smaller)
+
+Benefits:
+- less boilerplate around `Application`, document creation, casting, and feature collections
+- much fewer API ceremony tokens for agents to read and write
+- the code describes the modeling intent directly: sketch rectangle, get profile, extrude
+- raw escape hatch is still available through `.raw` when the compact layer is not enough
+
 ## Repo shape
 
 - [src/fusion_sparse](src/fusion_sparse): shipped library
