@@ -4,44 +4,10 @@ FusionSparse is a generator-driven Python layer for the Autodesk Fusion API.
 
 The project keeps the full raw `adsk.*` surface reachable while generating a smaller, cleaner, more token-sparse interface for common Design workspace workflows.
 
-## Goals
-
-- Keep raw Fusion access available at all times.
-- Generate as much surface area as possible from Autodesk's official API corpus.
-- Make common modeling code much shorter and easier for agents to read and write.
-- Keep updates mechanical: refresh corpus, rebuild IR, regenerate artifacts, review diffs.
-
-## Current scope
-
-FusionSparse is focused on the Design workspace, not the whole Fusion app.
-
-Current compact coverage includes:
-- context/bootstrap
-- sketches
-- construction planes / axes / points
-- extrude / revolve / sweep / loft / patch
-- shell / draft / hole / fillet / chamfer
-- combine / mirror / circular pattern / rectangular pattern
-- move / offset / replace face / scale / split body / thread / trim
-
-Everything else remains available through raw `adsk.*` access and `.raw`.
-
-## Status
-
-- generator pipeline is working end to end
-- Autodesk corpus is pinned as a submodule
-- IR build, diff, and regeneration are in place
-- Fusion deployment exists for both scripts and add-ins
-- official-vs-compact validation runs in real Fusion through MCP
-
-Current proof points:
-- `53/53` official-vs-compact sample pairs matched in real Fusion
-- paired samples are `61.9%` smaller by characters and `52.7%` smaller by estimated tokens
-- Design-workspace validated families: `41`
 
 ## Example
 
-This is a real Autodesk sample workflow from `extrudeFeatures_addSimple_Sample.htm`, compared with the FusionSparse remake that produces the same result in real Fusion.
+This is a real Autodesk sample workflow from `extrudeFeatures_addSimple_Sample.htm`, compared with the FusionSparse remake that produces the same result.
 
 Official Autodesk style:
 
@@ -90,6 +56,42 @@ Benefits:
 - much fewer API ceremony tokens for agents to read and write
 - the code describes the modeling intent directly: sketch rectangle, get profile, extrude
 - raw escape hatch is still available through `.raw` when the compact layer is not enough
+
+
+## Goals
+
+- Keep raw Fusion access available at all times.
+- Generate as much surface area as possible from Autodesk's official API corpus.
+- Make common modeling code much shorter and easier for agents to read and write.
+- Keep updates mechanical: refresh corpus, rebuild IR, regenerate artifacts, review diffs.
+
+## Current scope
+
+FusionSparse is focused on the Design workspace, not the whole Fusion app.
+
+Current compact coverage includes:
+- context/bootstrap
+- sketches
+- construction planes / axes / points
+- extrude / revolve / sweep / loft / patch
+- shell / draft / hole / fillet / chamfer
+- combine / mirror / circular pattern / rectangular pattern
+- move / offset / replace face / scale / split body / thread / trim
+
+Everything else remains available through raw `adsk.*` access and `.raw`.
+
+## Status
+
+- generator pipeline is working end to end
+- Autodesk corpus is pinned as a submodule
+- IR build, diff, and regeneration are in place
+- Fusion deployment exists for both scripts and add-ins
+- official-vs-compact validation runs in real Fusion through MCP
+
+Current proof points:
+- `53/53` official-vs-compact sample pairs matched in real Fusion
+- paired samples are `61.9%` smaller by characters and `52.7%` smaller by estimated tokens
+- Design-workspace validated families: `41`
 
 ## Repo shape
 
